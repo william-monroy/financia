@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@adiwajshing/keyed-db':
+    specifier: ^0.2.4
+    version: 0.2.4
   '@bot-whatsapp/bot':
     specifier: latest
     version: 0.1.32
@@ -20,9 +23,27 @@ dependencies:
   '@bot-whatsapp/provider':
     specifier: latest
     version: 0.1.32
+  '@ffmpeg-installer/ffmpeg':
+    specifier: ^1.1.0
+    version: 1.1.0
   '@whiskeysockets/baileys':
-    specifier: ^6.4.0
-    version: 6.4.0
+    specifier: ^6.4.1
+    version: 6.4.1
+  bot-ws-plugin-openai:
+    specifier: ^1.0.2
+    version: 1.0.2
+  dotenv:
+    specifier: ^16.0.3
+    version: 16.3.1
+  fluent-ffmpeg:
+    specifier: ^2.1.2
+    version: 2.1.2
+  mime-types:
+    specifier: 2.1.35
+    version: 2.1.35
+  openai:
+    specifier: ^3.2.1
+    version: 3.2.1
   wa-sticker-formatter:
     specifier: 4.3.2
     version: 4.3.2
@@ -1179,8 +1200,8 @@ packages:
       codec-parser: 2.4.3
     dev: false
 
-  /@whiskeysockets/baileys@6.4.0:
-    resolution: {integrity: sha512-SdCoVpILWX7z2WEe40BwNjMqpI6Guf0gbG80NNfsJBcRcDQIS9pkmazIhTvNKytWZm7BFZR+QNKcBUxdPqdLsQ==}
+  /@whiskeysockets/baileys@6.4.1:
+    resolution: {integrity: sha512-u4eFC4fhBD6zvgzXFm/SdcFivG87CJK/xQ2H7O9wDiu3MIYrPF117lH5EQkRNqQ1Hg2jw8CgsYe7+soeA993ew==}
     peerDependencies:
       jimp: ^0.16.1
       link-preview-js: ^3.0.0
@@ -1288,6 +1309,14 @@ packages:
       - debug
     dev: false
 
+  /axios@0.26.1:
+    resolution: {integrity: sha512-fPwcX4EvnSHuInCMItEhAGnaSEXRBjtzh9fOtsE6E1G6p7vl7edEeZe11QHf18+6+9gR5PbKV/sGKNaD8YaMeA==}
+    dependencies:
+      follow-redirects: 1.15.3
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /axios@1.5.0:
     resolution: {integrity: sha512-D4DdjDo5CY50Qms0qGQTTw6Q44jl7zRwY7bthds06pUGfChBCTcQs+N743eFWGEd6pRTMd6A+I87aWyFV5wiZQ==}
     dependencies:
@@ -1326,6 +1355,10 @@ packages:
 
   /bmp-js@0.0.1:
     resolution: {integrity: sha512-OS74Rlt0Aynu2mTPmY9RZOUOXlqWecFIILFXr70vv16/xCZnFxvri9IKkF1IGxQ8r9dOE62qGNpKxXx8Lko8bg==}
+    dev: false
+
+  /bot-ws-plugin-openai@1.0.2:
+    resolution: {integrity: sha512-25pIQNwqoRbx/emfb3wl7RP5FdI627sDaou70Fnw7ss0b2maUWzJbjgoWJ52DzrNzL4bNfyt+zOXoZHsCEtBcA==}
     dev: false
 
   /bowser@2.11.0:
@@ -2128,6 +2161,15 @@ packages:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
     dependencies:
       wrappy: 1.0.2
+    dev: false
+
+  /openai@3.2.1:
+    resolution: {integrity: sha512-762C9BNlJPbjjlWZi4WYK9iM2tAVAv0uUp1UmI34vb0CN5T2mjB/qM6RYBmNKMh/dN9fC+bxqPwWJZUTWW052A==}
+    dependencies:
+      axios: 0.26.1
+      form-data: 4.0.0
+    transitivePeerDependencies:
+      - debug
     dev: false
 
   /opus-decoder@0.7.1:
