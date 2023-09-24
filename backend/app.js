@@ -12,6 +12,7 @@ const BaileysProvider = require("@bot-whatsapp/provider/baileys");
 const MockAdapter = require("@bot-whatsapp/database/mock");
 const OpenAI = require("openai");
 
+
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
@@ -38,6 +39,36 @@ const flowPrincipal = addKeyword(EVENTS.WELCOME)
     messages.push({ role: "assistant", content: text });
     const responseJson = JSON.parse(text);
     console.log(responseJson.user_data);
+    let hasNull = false;
+    for (const key in responseJson.user_data) {
+      if (responseJson.user_data[key] === null) {
+        hasNull = true;
+      }
+    }
+    if(!hasNull){
+      // Send request to neural network
+      console.log("Sending request to neural network");
+      const response = await fetch('http://10.22.131.156:3001/calculateScore?investor_profile='+responseJson.user_data.investing_profile, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+      const data = await response.json();
+      console.log(data.recomendations);
+      messages.push({ role: "system", content: "Estas son las recomendaciones de inversion: " + data.recomendations + ". Cierra la conversacion diciendo el resultado del perfil de inversionista del usuario y menciona las recomendaciones de inversiones." });
+
+      const chatCompletionClosing = await openai.chat.completions.create({
+        messages: messages,
+        model: MODEL,
+      });
+      const textClosing  = chatCompletionClosing.choices[0].message.content;
+      messages.push({ role: "assistant", content: textClosing });
+      const responseJsonClosing = JSON.parse(textClosing);
+      await flowDynamic(responseJsonClosing.response)
+      messages = messages.slice(0,2)
+      return;
+    }
     await flowDynamic(responseJson.response)
   });
 
